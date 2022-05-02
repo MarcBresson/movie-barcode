@@ -23,16 +23,13 @@
 
 ## About The Project
 
-<div style="display:grid;grid-template-columns: repeat(2, 1fr);grid-gap: 10px;">
-    <img src="./images/example-Fight_Club-intensity.png"/>
-    <img src="./images/example-Ponyo-step.png"/>
-    <p>Fight Club - Intensity</p>
-    <p>Ponyo - Step</p>
-    <img src="./images/example-spiderman_no_way_home-intensity.png"/>
-    <img src="./images/example-the_wind_rises-hue.png"/>
-    <p>SpiderMan: No way home - Intensity</p>
-    <p>the wind rises - Hue</p>
-</div>
+| Fight Club - Intensity | Ponyo - Step |
+|------------------------|--------------|
+|![](./images/example-Fight_Club-intensity.png)|![](./images/example-Ponyo-step.png)|
+
+| SpiderMan: No way home - Intensity | The wind rises - Hue |
+|------------------------|--------------|
+|![](./images/example-spiderman_no_way_home-intensity.png)|![](./images/example-Encanto-hue.png)|
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
