@@ -23,13 +23,38 @@
 
 ## About The Project
 
-| Fight Club - Intensity | Ponyo - Step |
-|------------------------|--------------|
-|![](./images/example-Fight_Club-intensity.png)|![](./images/example-Ponyo-step.png)|
+|            Fight Club - Intensity            |
+|----------------------------------------------|
+|![](./images/example-Fight_Club-intensity.png)|
 
-| SpiderMan: No way home - Intensity | The wind rises - Hue |
-|------------------------|--------------|
-|![](./images/example-spiderman_no_way_home-intensity.png)|![](./images/example-Encanto-hue.png)|
+|            Ponyo - Step            |
+|------------------------------------|
+|![](./images/example-Ponyo-step.png)|
+
+|           SpiderMan: No way home - Intensity            |
+|---------------------------------------------------------|
+|![](./images/example-spiderman_no_way_home-intensity.png)|
+
+|            Encanto - Hue            |
+|-------------------------------------|
+|![](./images/example-Encanto-hue.png)|
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, you can simply open an issue with the tag "enhancement". You can also fork the repo and create a pull request.
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -40,13 +65,11 @@
 Movie BarCode requires an installation of Python 3.6 or greater, as well as pip. (Pip is typically bundled with Python [installations](https://python.org/downloads).)
 
 To install from PyPI with pip:
-
 ```bash
 $ python -m pip install MovieBarcode
 ```
 
 Sometimes, the PyPI release becomes slightly outdated. To install from the source with pip:
-
 ```bash
 $ python -m pip install git+https://github.com/MarcBresson/movie-barcode
 ```
@@ -65,27 +88,11 @@ Process a collection of movies at once :
 >>> movies = Movies(images_output_dir, computed_colors_output_dir)
 
 # Will open a dialog. If a movie has already been computed, it will recover the npy file.
->>> movies.load_movies()
->>> movies.compute_movies()
+>>> movies.load()
+>>> movies.compute()
+>>> movies.save() # optional. It allows to directly load the computed array on movies.load()
 >>> movies.export_every_barcode()
 ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

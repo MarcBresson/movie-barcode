@@ -153,7 +153,7 @@ class Movie:
 
         return np.resize(ordered_palette, (color_palette_size, 3))
 
-    def export_npy(
+    def save(
         self,
         dir_path: str,
     ) -> None:
@@ -161,7 +161,6 @@ class Movie:
         
         Example
         ~~~~~~~~
-        movie.export_npy("path/to/directory")
         movie.save("path/to/directory")
 
         Parameters
@@ -177,9 +176,8 @@ class Movie:
         file_path = os.path.join(dir_path, self.file_name + '-' + self.technique)
         np.save(file_path, self.colors)
         logger.info(f"{file_path} : saved succefully !")
-    save = export_npy
 
-    def import_npy(
+    def load(
         self,
         dir_path: str,
         failure_autorized = False
@@ -188,7 +186,6 @@ class Movie:
         
         Example
         ~~~~~~~~
-        movie.import_npy("path/to/directory")
         movie.load("path/to/directory")
 
         Parameters
@@ -208,7 +205,6 @@ class Movie:
                 raise FileNotFoundError
             else:
                 pass
-    load = import_npy
 
     def export_barcode(
         self,

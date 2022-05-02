@@ -17,7 +17,7 @@ class Movies:
         self.dir_output_images = dir_output_images
         self.movies: List[Movie] = []
 
-    def load_movies(
+    def load(
         self,
         paths: str | List[str] | None = None,
         check_for_existing = True
@@ -44,7 +44,18 @@ class Movies:
         # We check if we already computed frames for every movie
         if check_for_existing:
             for movie in self.movies:
-                movie.import_npy(self.dir_output_np, "", True)
+                movie.load(self.dir_output_np, "", True)
+
+    def save(
+        self
+    ) -> None:
+        
+        os.makedirs(self.dir_output_np, exist_ok=True)
+
+        for movie in self.movies:
+            movie.save(
+                self.dir_output_np,
+            )
 
     def compute(
         self,
@@ -57,15 +68,6 @@ class Movies:
         if len(self.movies)==0:
             logger.error("No movie loaded. Colors generation aborted.")
 
-    def export_every_barcode(
-        self
-    ) -> None:
-
-        for movie in self.movies:
-            movie.export_every_barcode(
-                self.dir_output_images
-            )
-
     def export_barcode(
         self,
         method
@@ -77,24 +79,11 @@ class Movies:
                 self.dir_output_images
             )
 
-    def export_npyy(
-        self
-    ) -> None:
-        
-        os.makedirs(self.dir_output_np, exist_ok=True)
-
-        for movie in self.movies:
-            movie.export_npy(
-                self.dir_output_np,
-            )
-    save = export_npyy
-
-    def import_npyy(
+    def export_every_barcode(
         self
     ) -> None:
 
         for movie in self.movies:
-            movie.import_npy(
-                self.dir_output_np,
+            movie.export_every_barcode(
+                self.dir_output_images
             )
-    load = import_npyy
