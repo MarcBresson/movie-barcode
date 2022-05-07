@@ -9,6 +9,7 @@ from PIL import Image
 from typing import Literal
 from collections.abc import Callable
 from movie_barcode.barcode import BarCode
+from movie_barcode.timer import Timer
 
 logger = logging.getLogger(__name__)
 
@@ -30,10 +31,14 @@ class Movie:
 
         self.set_generation_technique()
 
+
+
     def _count_total_frame(self):
         cap = cv2.VideoCapture(self.input_path)
         self.total_frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
         cap.release()
+
+
 
     def compute_colors(
         self,
@@ -63,6 +68,7 @@ class Movie:
 
         sys.stdout.write(self.file_name + ":\n")
 
+        timer = Timer(self.nbr_frame_to_compute)
         frame_computed = 0
         # We must go through every frame due to encoding specificity
         for frame_index, frame in enumerate(movie.decode(video=id_video_flux)):
@@ -73,16 +79,19 @@ class Movie:
                 dominant_colors[frame_computed] = tableau_image
 
                 frame_computed += 1
-                self._display_progress_bar(frame_computed, self.nbr_frame_to_compute)
+                self._display_progress_bar(frame_computed, self.nbr_frame_to_compute, timer)
 
         self.colors = dominant_colors
 
         sys.stdout.write(" " * shutil.get_terminal_size().columns)
 
+
+
     def _display_progress_bar(
         self,
         frame: int,
         total_frame: int,
+        timer: Timer,
         ch: str = "█",
         scale: float = 0.55
     ) -> None:
@@ -113,9 +122,11 @@ class Movie:
         remaining = max_width - filled
         progress_bar = ch * filled + " " * remaining
         percent = round(100.0 * frame / float(total_frame), 1)
-        text = f" ↳ |{progress_bar}| {percent}%\r"
+        text = f" ↳ |{progress_bar}| {percent}% - {timer.remains(frame)} remaining \r"
         sys.stdout.write(text)
         sys.stdout.flush()
+
+
 
     def _get_dominant_colors(
         self,
@@ -153,6 +164,8 @@ class Movie:
 
         return np.resize(ordered_palette, (color_palette_size, 3))
 
+
+
     def save(
         self,
         dir_path: str,
@@ -176,6 +189,8 @@ class Movie:
         file_path = os.path.join(dir_path, self.file_name + '-' + self.technique)
         np.save(file_path, self.colors)
         logger.info(f"{file_path} : saved succefully !")
+
+
 
     def load(
         self,
@@ -205,6 +220,8 @@ class Movie:
                 raise FileNotFoundError
             else:
                 pass
+
+
 
     def export_barcode(
         self,
@@ -240,6 +257,8 @@ class Movie:
         code_barre = code_barre.resize((self.output_width, self.output_height), Image.NEAREST)
         code_barre.save(os.path.join(dir_path, f'{self.file_name} barcode {method}.png'))
 
+
+
     def export_every_barcode(
         self,
         dir_path: str,
@@ -262,10 +281,11 @@ class Movie:
                 dir_path
             )
 
-    TECHNIQUES = Literal['dominant', 'squeeze']    
+
+
     def set_generation_technique(
         self,
-        technique: TECHNIQUES = 'dominant',
+        technique: Literal['dominant', 'squeeze'] = 'dominant',
         output_height: int = 1280,
         output_width: int = 1920 * 2,
         color_palette_size: int = 1280/5,

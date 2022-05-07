@@ -2,3 +2,6 @@ results/
 npy/
 
 **/__pycache__/
+dist/
+movie-barcode.egg-info/
+build/

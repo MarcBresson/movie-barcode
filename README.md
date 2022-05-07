@@ -66,7 +66,7 @@ Movie BarCode requires an installation of Python 3.6 or greater, as well as pip.
 
 To install from PyPI with pip:
 ```bash
-$ python -m pip install MovieBarcode
+$ python -m pip install movie-barcode
 ```
 
 Sometimes, the PyPI release becomes slightly outdated. To install from the source with pip:

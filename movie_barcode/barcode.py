@@ -32,6 +32,8 @@ class BarCode:
         _, saturation, _ = colorsys.rgb_to_hsv(*pixel)
         return saturation
 
+
+
     def sort_image(
         self,
         data: np.ndarray,
